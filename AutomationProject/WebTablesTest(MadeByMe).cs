@@ -12,14 +12,6 @@ namespace AutomationProject
 
         public void AddStudent(IWebDriver Driver, string firstName, string lastName, string email, string age, string salary, string department)
         {
-            Driver.Navigate().GoToUrl("https://demoqa.com/");
-            Driver.Manage().Window.Maximize();
-
-            IWebElement elementsButton = Driver.FindElement(By.XPath("//div[@class='card mt-4 top-card'][1]"));
-            elementsButton.Click();
-
-            IWebElement webTablesButton = Driver.FindElement(By.XPath("//span[text()='Web Tables']"));
-            webTablesButton.Click();
 
             IWebElement addNewRecordButton = Driver.FindElement(By.Id("addNewRecordButton"));
             addNewRecordButton.Click();
@@ -61,6 +53,15 @@ namespace AutomationProject
         public void Test1()
         {
             IWebDriver Driver = new ChromeDriver();
+            Driver.Navigate().GoToUrl("https://demoqa.com/");
+            Driver.Manage().Window.Maximize();
+
+            IWebElement elementsButton = Driver.FindElement(By.XPath("//div[@class='card mt-4 top-card'][1]"));
+            elementsButton.Click();
+
+            IWebElement webTablesButton = Driver.FindElement(By.XPath("//span[text()='Web Tables']"));
+            webTablesButton.Click();
+
             AddStudent(Driver, "Cristina", "Filipan", "cristinafilipan2704@gmail.com", "34", "1000", "testare");
             AddStudent(Driver, "Marius", "Popescu", "marius.popescu@gmail.com", "30", "2000", "development");
         }
