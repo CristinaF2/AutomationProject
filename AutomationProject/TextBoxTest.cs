@@ -7,45 +7,45 @@ namespace AutomationProject
 {
     public class TextBoxTest
     {
-        IWebDriver driver;
+        IWebDriver Driver;
 
         [Test]
         public void Test1()
         {
-            driver=new ChromeDriver();
+            Driver=new ChromeDriver();
 
-            driver.Navigate().GoToUrl("https://demoqa.com/");
-            driver.Manage().Window.Maximize();
-            IJavaScriptExecutor js= (IJavaScriptExecutor)driver;
+            Driver.Navigate().GoToUrl("https://demoqa.com/");
+            Driver.Manage().Window.Maximize();
+            IJavaScriptExecutor js= (IJavaScriptExecutor)Driver;
             js.ExecuteScript("window.scrollTo(0,1000)");
 
-            IWebElement elementsButton = driver.FindElement(By.XPath("//h5[text()='Elements']"));
+            IWebElement elementsButton = Driver.FindElement(By.XPath("//h5[text()='Elements']"));
             elementsButton.Click();
 
-            IWebElement textBoxButton = driver.FindElement(By.XPath("//span[text()='Text Box']"));
+            IWebElement textBoxButton = Driver.FindElement(By.XPath("//span[text()='Text Box']"));
             textBoxButton.Click();
 
-            IWebElement fullNameElement= driver.FindElement(By.Id("userName"));
+            IWebElement fullNameElement= Driver.FindElement(By.Id("userName"));
             fullNameElement.SendKeys("Cristina Filipan");
 
-            IWebElement emailElement = driver.FindElement(By.Id("userEmail"));
+            IWebElement emailElement = Driver.FindElement(By.Id("userEmail"));
             emailElement.SendKeys("cristinafilipan2704@gmail.com");
 
-            IWebElement currentAddressElement = driver.FindElement(By.Id("currentAddress"));
+            IWebElement currentAddressElement = Driver.FindElement(By.Id("currentAddress"));
             currentAddressElement.SendKeys("Strada Microration vest nr 1 ap 13");
 
-            IWebElement permanentAddressElement = driver.FindElement(By.Id("permanentAddress"));
+            IWebElement permanentAddressElement = Driver.FindElement(By.Id("permanentAddress"));
             permanentAddressElement.SendKeys("Strada Galaxiei nr 1 bloc A ap 28");
 
             js.ExecuteScript("window.scrollTo(0,1000)");
 
-            IWebElement submitButton = driver.FindElement(By.Id("submit"));
+            IWebElement submitButton = Driver.FindElement(By.Id("submit"));
             submitButton.Click();
 
-            string actualName = driver.FindElement(By.Id("name")).Text;
-            string actualEmail = driver.FindElement(By.Id("email")).Text;
+            string actualName = Driver.FindElement(By.Id("name")).Text;
+            string actualEmail = Driver.FindElement(By.Id("email")).Text;
 
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             IWebElement actualCurrentAddressElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//p[@id='currentAddress']")));
             string actualCurrentAddress = actualCurrentAddressElement.Text;
 
@@ -75,10 +75,10 @@ namespace AutomationProject
             Assert.AreEqual("Current Address", currentAddressPlaceholder, "Current Address placeholder value is incorrect");
             Assert.IsTrue(string.IsNullOrEmpty(permanentAddressPlaceholder), "Permanent Address field has a placeholder!!");
 
-            IWebElement fullNameLabel = driver.FindElement(By.Id("userName-label"));
-            IWebElement emailLabel = driver.FindElement(By.Id("userEmail-label"));
-            IWebElement currentAddressLabel = driver.FindElement(By.Id("currentAddress-label"));
-            IWebElement permanentAddressLabel = driver.FindElement(By.Id("permanentAddress-label"));
+            IWebElement fullNameLabel = Driver.FindElement(By.Id("userName-label"));
+            IWebElement emailLabel = Driver.FindElement(By.Id("userEmail-label"));
+            IWebElement currentAddressLabel = Driver.FindElement(By.Id("currentAddress-label"));
+            IWebElement permanentAddressLabel = Driver.FindElement(By.Id("permanentAddress-label"));
 
             //assert the names of fields labels
             Assert.AreEqual("Full Name", fullNameLabel.Text, "Full Name label text is incorrect");
@@ -87,14 +87,17 @@ namespace AutomationProject
             Assert.AreEqual("Permanent Address", permanentAddressLabel.Text, "Permanent Address label text is incorrect");
 
         }
-        /*
-         [TearDown]
-         public void TearDown()
-         {
-             driver.Quit();
-             driver.Close();
 
-         }
-         */
+        [TearDown]
+        public void TearDown()
+        {
+            if (Driver !=null)
+            {
+                Driver.Dispose();
+                Driver.Quit();
+
+            }
+        }
+         
     }
 }
