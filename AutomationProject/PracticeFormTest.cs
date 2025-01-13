@@ -116,7 +116,9 @@ namespace AutomationProject
             monthSelect.SelectByValue("3");
 
 
-            IWebElement dayElement = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[@class='react-datepicker__day react-datepicker__day--027']")));
+            IWebElement dayElement = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(@class,'day--001')and not(contains(@class, '--outside-month'))]"))); 
+
+           
             js.ExecuteScript("arguments[0].click();", dayElement);
             
             /*
