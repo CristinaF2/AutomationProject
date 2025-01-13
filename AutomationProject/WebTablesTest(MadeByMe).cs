@@ -1,9 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
-using SeleniumExtras.WaitHelpers;
 
 namespace AutomationProject
 {
@@ -28,8 +24,8 @@ namespace AutomationProject
             jse.ExecuteScript("arguments[0].click();", submitButton);
 
             List<IWebElement> currentListOfStudents = Driver.FindElements(By.XPath("//div[@class='rt-tbody']/div/div[@class='rt-tr -odd' or @class='rt-tr -even']")).ToList();
-
             int rowCount = currentListOfStudents.Count;
+
             string baseXpath = $"//div[@class='rt-tr-group'][{rowCount}]";
 
             IWebElement addedFirstName = Driver.FindElement(By.XPath($"{baseXpath}//div[@class='rt-td'][1]"));
