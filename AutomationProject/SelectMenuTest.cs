@@ -54,6 +54,9 @@ namespace AutomationProject
 
             // Select an option by visible text
             selectElement.SelectByText("Purple");
+            
+            //se putea si in felul asta, cu id ul lui Purple care e 4:
+            //selectElement.SelectByValue("4");
 
             IWebElement multiSelectDropdownElement = Driver.FindElement(By.Id("react-select-4-input"));
             //Create an Actions object

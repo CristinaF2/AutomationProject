@@ -118,7 +118,6 @@ namespace AutomationProject
 
             IWebElement dayElement = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(@class,'day--001')and not(contains(@class, '--outside-month'))]"))); 
 
-           
             js.ExecuteScript("arguments[0].click();", dayElement);
             
             /*
@@ -129,8 +128,7 @@ namespace AutomationProject
             // Wait to observe results
             Thread.Sleep(3000);
 
-            IWebElement subjectsField = Driver.FindElement(By.Id("subjectsInput"));
-
+            
             /*
              subjectsField.SendKeys("English");
              subjectsField.SendKeys(Keys.Enter);
@@ -153,6 +151,8 @@ namespace AutomationProject
 
              */
 
+
+            IWebElement subjectsField = Driver.FindElement(By.Id("subjectsInput"));
 
             //One more way to fill the subjectsField using Actions class
             //Create an Actions object
