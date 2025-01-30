@@ -59,7 +59,7 @@ namespace AutomationProject
                 System.Threading.Thread.Sleep(1000);
             }
 
-            bool selectionSucceded = true;
+            bool selectionSucceeded = true;
             List<string> notSelectedElements = new List<string>();
 
 
@@ -67,13 +67,13 @@ namespace AutomationProject
             {
                 if (!itemsList[i].GetAttribute("class").Contains("active"))
                 {
-                    selectionSucceded = false;
+                    selectionSucceeded = false;
                     notSelectedElements.Add(itemsList[i].Text);
                 }
             }
 
 
-            if (selectionSucceded)
+            if (selectionSucceeded)
             {
                 Console.WriteLine("All elements were selected successfully!");
             }
