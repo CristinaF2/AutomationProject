@@ -99,7 +99,8 @@ namespace AutomationProject
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='react-datepicker']")));
   
             Thread.Sleep(500);
-                                            
+
+
             IWebElement yearDropdown = Driver.FindElement(By.XPath("//select[@class='react-datepicker__year-select']"));
             SelectElement yearSelect = new SelectElement(yearDropdown);
             yearSelect.SelectByValue("1990");
