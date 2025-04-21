@@ -5,52 +5,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutomationProject.Pages;
 
 namespace AutomationProject
 {
     public class WebTablesTest_TrainingSession_
     {
         IWebDriver Driver;
+        HomePage homePage;
+        CommonPage commonPage;
+        WebTablesPage webTablesPage;
+
         [Test]
         public void Test1()
         {
             Driver=new ChromeDriver();
+            homePage=new HomePage(Driver);
+            commonPage=new CommonPage(Driver);
+            webTablesPage=new WebTablesPage(Driver);
 
             Driver.Navigate().GoToUrl("https://demoqa.com/");
             Driver.Manage().Window.Maximize();
 
-            IWebElement elementsButton = Driver.FindElement(By.XPath("//div[@class='card mt-4 top-card'][1]"));
-            elementsButton.Click();
+            homePage.ClickOnElementsPage();
+            commonPage.GoToDesiredMenu("Web Tables");
 
-            IWebElement webTablesButton = Driver.FindElement(By.XPath("//span[text()='Web Tables']"));
-            webTablesButton.Click();
+            int initialSizeOfEmployeesList = webTablesPage.GetSizeOfInitialEmployeesList();
 
-            IWebElement addNewRecordButton = Driver.FindElement(By.Id("addNewRecordButton"));
-            addNewRecordButton.Click();
+            webTablesPage.AddNewEmployee();
+            webTablesPage.FillRegistrationForm("Cristina", "Filipan", "cristina123@gmail.com", "59", "1000", "testare");
+            webTablesPage.SubmitNewEmployee();
 
-            IWebElement firstNameElement = Driver.FindElement(By.Id("firstName"));
-            firstNameElement.SendKeys("Cristina");
+            webTablesPage.CheckDetailsOfLastEmployeeAdded("Cristina", "Filipan", "59", "cristina123@gmail.com", "1000", "testare");
 
-            IWebElement lastNameElement = Driver.FindElement(By.Id("lastName"));
-            lastNameElement.SendKeys("Filipan");
+            webTablesPage.AddNewEmployee();
+            webTablesPage.FillRegistrationForm("Ioana", "Popescu", "popescuioana1789@gmail.com", "63", "5000", "development");
+            webTablesPage.SubmitNewEmployee();
 
-            IWebElement userEmailElement = Driver.FindElement(By.Id("userEmail"));
-            userEmailElement.SendKeys("cristinafilipan2704@gmail.com");
+            webTablesPage.CheckDetailsOfLastEmployeeAdded("Ioana", "Popescu", "63", "popescuioana1789@gmail.com", "5000", "development");
 
-            IWebElement ageElement = Driver.FindElement(By.Id("age"));
-            ageElement.SendKeys("34");
+            List<IWebElement> expectedListOfEmployees = Driver.FindElements(By.XPath("//div[@class='rt-tbody']/div/div[@class='rt-tr -odd' or @class='rt-tr -even']")).ToList();
+            webTablesPage.CheckSizeOfEmployeesList(initialSizeOfEmployeesList + 2, expectedListOfEmployees.Count);
 
-            IWebElement salaryElement = Driver.FindElement(By.Id("salary"));
-            salaryElement.SendKeys("150569");
-
-            IWebElement departmentElement = Driver.FindElement(By.Id("department"));
-            departmentElement.SendKeys("testare");
-
-            IJavaScriptExecutor jse = (IJavaScriptExecutor)Driver;
-
-            IWebElement submitButton = Driver.FindElement(By.Id("submit"));
-            jse.ExecuteScript("arguments[0].click();", submitButton);
-            //submitButton.Submit();
 
             //submit() method does not work always
 
@@ -65,31 +61,35 @@ namespace AutomationProject
              Assert.True(newRowWebTable.Text.Contains("testare"));
             */
 
-            IWebElement firstName = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][1]"));
-            IWebElement lastName = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][2]"));
-            IWebElement age = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][3]"));
-            IWebElement email = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][4]"));
-            IWebElement salary = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][5]"));
-            IWebElement department = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][6]"));
+            /*
+             IWebElement firstName = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][1]"));
+             IWebElement lastName = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][2]"));
+             IWebElement age = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][3]"));
+             IWebElement email = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][4]"));
+             IWebElement salary = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][5]"));
+             IWebElement department = Driver.FindElement(By.XPath("//div[@class='rt-tr-group'][4]//div[@class='rt-td'][6]"));
 
-            Assert.That(firstName.Text.Equals("Cristina"));
-            Assert.That(lastName.Text.Equals("Filipan"));
-            Assert.That(email.Text.Equals("cristinafilipan2704@gmail.com"));
-            Assert.That(age.Text.Equals("34"));
-            Assert.That(salary.Text.Equals("150569"));
-            Assert.That(department.Text.Equals("testare"));
+
+             Assert.That(firstName.Text.Equals("Cristina"));
+             Assert.That(lastName.Text.Equals("Filipan"));
+             Assert.That(email.Text.Equals("cristinafilipan2704@gmail.com"));
+             Assert.That(age.Text.Equals("34"));
+             Assert.That(salary.Text.Equals("150569"));
+             Assert.That(department.Text.Equals("testare"));
+            */
 
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (Driver !=null)
+           /* if (Driver !=null)
             {
                 Driver.Dispose();
                 Driver.Quit();
 
             }
+          */
         }
 
     }

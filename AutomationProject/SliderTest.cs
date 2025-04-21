@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace AutomationProject
 {
-    public class Slider
+    public class SliderTest
     {
         IWebDriver Driver;
 

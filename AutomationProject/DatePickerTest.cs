@@ -5,7 +5,7 @@ using SeleniumExtras.WaitHelpers;
 
 namespace AutomationProject
 {
-    public class DatePicker
+    public class DatePickerTest
     {
         IWebDriver Driver;
 

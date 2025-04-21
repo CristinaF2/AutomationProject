@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace AutomationProject
 {
-    public class ProgressBar
+    public class ProgressBarTest
     {
         IWebDriver Driver;
 
