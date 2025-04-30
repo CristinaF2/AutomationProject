@@ -56,6 +56,7 @@ namespace AutomationProject.Pages
         {
             framesMethods.SwitchToFrame(frameElement);
             assertMethods.AssertEqualValues(frameTextElement1.Text, text);
+            framesMethods.SwitchToDefaultContent();
         }
         public void CheckTextOfSmallFrame(string text)
         {
