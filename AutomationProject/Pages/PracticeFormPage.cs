@@ -139,6 +139,7 @@ namespace AutomationProject.Pages
                 //After typing each subject, I added a small pause using .Pause(TimeSpan.FromMilliseconds(500)).This is to ensure the dropdown is visible and can be interacted with.
                 //The pause (.Pause()) ensures the dropdown has enough time to display the filtered options, especially if the suggestions might be delayed a little bit after typing.
                 // Click on the input element
+
                 actions.Click(subjectsField)
                       .SendKeys(subject)                      // Send the subject name
                       .Pause(TimeSpan.FromMilliseconds(500))  // Pause for the dropdown to show

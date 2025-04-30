@@ -16,7 +16,9 @@ namespace AutomationProject.Pages
 
         IWebElement FormsButton => webDriver.FindElement(By.XPath("//div[@class='card mt-4 top-card'][2]"));
         IWebElement ElementsButton => webDriver.FindElement(By.XPath("//div[@class='card mt-4 top-card'][1]"));
+        IWebElement AlertsFramesWindowsElement => webDriver.FindElement(By.XPath("//div[@class='card mt-4 top-card'][3]"));
 
+     
         public void ClickOnFormsPage()
         {
             elementMethods.ClickOnElement(FormsButton);
@@ -26,6 +28,11 @@ namespace AutomationProject.Pages
         public void ClickOnElementsPage()
         {
             elementMethods.ClickOnElement(ElementsButton);
+
+        }
+        public void ClickOnAlertsFrameWindowsPage()
+        {
+            elementMethods.ClickOnElement(AlertsFramesWindowsElement);
 
         }
 

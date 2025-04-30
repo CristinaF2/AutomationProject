@@ -1,12 +1,16 @@
 ﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using static OpenQA.Selenium.BiDi.Modules.Script.RealmInfo;
+using AutomationProject.Pages;
 
 namespace AutomationProject
 {
     public class FramesTest
     {
         IWebDriver Driver;
+        HomePage homePage;
+        CommonPage commonPage;
+        FramesPage framesPage;
         [Test]
         public void TestMethod()
         {
@@ -16,33 +20,42 @@ namespace AutomationProject
             Driver.Manage().Window.Maximize();
 
 
-            IWebElement alertsFramesWindowsElement = Driver.FindElement(By.XPath("//div[@class='card mt-4 top-card'][3]"));
-            alertsFramesWindowsElement.Click();
+            homePage=new HomePage(Driver);
+            commonPage=new CommonPage(Driver);
+            framesPage=new FramesPage(Driver);
 
-        
-            List<IWebElement> submenuItems = Driver.FindElements(By.XPath("//div[@class='element-list collapse show']//li[@class='btn btn-light ']")).ToList();
-            submenuItems[2].Click();
 
+            homePage.ClickOnAlertsFrameWindowsPage();
+            commonPage.GoToDesiredMenu("Frames");
           
 
-            IWebElement frameElement = Driver.FindElement(By.Id("frame1"));
-            Driver.SwitchTo().Frame(frameElement);
+            framesPage.GetTextFromBigFrame();
+            framesPage.GetTextFromSmallFrame();
 
-            IWebElement frameTextElement1 = Driver.FindElement(By.Id("sampleHeading"));
-            Console.WriteLine(frameTextElement1.Text);
-
-            Driver.SwitchTo().DefaultContent();
+            framesPage.CheckTextOfBigFrame("This is a sample page");
+            framesPage.CheckTextOfSmallFrame("This is a sample page");
 
 
-            IWebElement frameElement2 = Driver.FindElement(By.Id("frame2"));
-            Driver.SwitchTo().Frame(frameElement2);
 
-            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
-            js.ExecuteScript("window.scrollTo(0,1000)");
+            /*
+             IWebElement frameElement = Driver.FindElement(By.Id("frame1"));
+             Driver.SwitchTo().Frame(frameElement);
 
-            IWebElement frameTextElement2 = Driver.FindElement(By.Id("sampleHeading"));
-            Console.WriteLine(frameTextElement2.Text);
-            
+             IWebElement frameTextElement1 = Driver.FindElement(By.Id("sampleHeading"));
+             Console.WriteLine(frameTextElement1.Text);
+
+             Driver.SwitchTo().DefaultContent();
+
+
+             IWebElement frameElement2 = Driver.FindElement(By.Id("frame2"));
+             Driver.SwitchTo().Frame(frameElement2);
+
+             IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+             js.ExecuteScript("window.scrollTo(0,1000)");
+
+             IWebElement frameTextElement2 = Driver.FindElement(By.Id("sampleHeading"));
+             Console.WriteLine(frameTextElement2.Text);
+             */
 
         }
     }
